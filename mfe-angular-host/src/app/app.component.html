@@ -1,2 +1,11 @@
-<h1>Microfrontend Host em Angular</h1>
-<p>Bem-vindo ao host do Angular!</p>
+<div class="main-container">
+  <app-header></app-header>
+  <app-side-menu
+    *ngIf="!hideSidebar()"
+    [sidebarCollapsed]="sidebarCollapsed()"
+    (setSidebarCollapsed)="setSidebarCollapsed($event)"
+  ></app-side-menu>
+  <main>
+    <router-outlet></router-outlet>
+  </main>
+</div>

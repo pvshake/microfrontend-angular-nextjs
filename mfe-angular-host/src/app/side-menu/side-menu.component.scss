@@ -1,0 +1,84 @@
+.sidenav {
+  background: #012a5b;
+  transition: all 0.5s ease;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  width: 265px;
+  height: 100vh;
+  box-shadow: 1px 0 20px 0 #8690a3;
+
+  &-collapsed {
+    width: 80px;
+  }
+
+  .logo-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px;
+
+    .btn-toggle {
+      background: none;
+      border: none;
+      color: #ececec;
+      font-size: 24px;
+      cursor: pointer;
+      transform: scale(1);
+      transition: all 0.3s ease;
+
+      &:hover {
+        scale: 1.1;
+      }
+    }
+  }
+
+  .sidenav-nav {
+    list-style: none;
+    padding: 16px;
+    margin: 0;
+    display: flex;
+    gap: 16px;
+    flex-direction: column;
+    align-items: center;
+    height: calc(100% - 58.4px);
+
+    .sidenav-nav-item {
+      border-radius: 8px;
+      width: 100%;
+      display: flex;
+      gap: 4px;
+
+      .sidenav-nav-link {
+        width: 100%;
+        display: flex;
+        gap: 8px;
+        padding: 4px 8px;
+        align-items: center;
+        height: 48px;
+        color: #ececec;
+        text-decoration: none;
+        border-radius: 10px;
+        transition: all 0.3s ease;
+
+        &-collapsed {
+          justify-content: center;
+        }
+      }
+
+      &:hover .sidenav-nav-link {
+        background-color: #ececec;
+        color: #012a5b;
+      }
+    }
+  }
+
+  .active {
+    background-color: #ececec;
+    color: #012a5b;
+
+    .sidenav-link-text {
+      color: #012a5b;
+    }
+  }
+}
