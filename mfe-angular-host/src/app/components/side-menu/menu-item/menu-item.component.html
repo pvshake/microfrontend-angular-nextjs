@@ -1,0 +1,13 @@
+<li>
+  <a
+    [routerLink]="route"
+    routerLinkActive="bg-primary-lighter text-primary-main"
+    class="flex items-center pl-3 pr-2 py-3 rounded-lg cursor-pointer text-gray-600 hover:bg-gray-100"
+  >
+    <fa-icon [icon]="icon"></fa-icon>
+    <span
+      class="flex-1 ms-3 whitespace-nowrap text-sm font-medium leading-6 text-ellipsis"
+      >{{ label }}</span
+    >
+  </a>
+</li>

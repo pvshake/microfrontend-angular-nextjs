@@ -5,12 +5,12 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-@layer reset, primeng;
+// @layer reset, primeng;
 
-@layer reset {
-  button {
-    &:focus {
-      box-shadow: none;
-    }
-  }
-}
+// @layer reset {
+//   button {
+//     &:focus {
+//       box-shadow: none;
+//     }
+//   }
+// }

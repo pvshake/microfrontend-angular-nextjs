@@ -1,11 +1,16 @@
-<div class="main-container">
-  <app-header></app-header>
-  <app-side-menu
-    *ngIf="!hideSidebar()"
-    [sidebarCollapsed]="sidebarCollapsed()"
-    (setSidebarCollapsed)="setSidebarCollapsed($event)"
-  ></app-side-menu>
-  <main>
+<main
+  class="sm:ml-[280px] bg-white-100 overflow-hidden min-h-screen sm:px-10 px-4 sm:py-6 py-4"
+>
+  <div class="sm:ml-[280px]">
+    <app-header (toggleMenu)="toggleMenu()"></app-header>
+  </div>
+  <div>
+    <app-side-menu
+      [isExpanded]="isExpanded"
+      (closeMenu)="closeMenu()"
+    ></app-side-menu>
+  </div>
+  <div>
     <router-outlet></router-outlet>
-  </main>
-</div>
+  </div>
+</main>

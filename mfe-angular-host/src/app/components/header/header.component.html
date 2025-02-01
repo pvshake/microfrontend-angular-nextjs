@@ -1,0 +1,15 @@
+<header class="h-20 w-full shrink-0 flex items-center justify-between">
+  <div class="ml-4">
+    <button (click)="toggleMenu.emit()" class="sm:hidden">
+      <fa-icon [icon]="faBars"></fa-icon>
+    </button>
+  </div>
+
+  <div class="mr-4 flex-center gap-2">
+    <app-avatar-dropdown
+      image="assets/images/foto_perfil.jpeg"
+      size="large"
+      shape="circle"
+    ></app-avatar-dropdown>
+  </div>
+</header>

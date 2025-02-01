@@ -1,0 +1,39 @@
+<aside
+  class="sm:border-r sm:border-gray-300 sm:border-dashed fixed top-0 left-0 z-30 w-[280px] h-screen transition-transform duration-300 ease-in-out"
+  [ngClass]="{
+    'translate-x-0': isExpanded,
+    '-translate-x-full': !isExpanded,
+    'sm:translate-x-0': true
+  }"
+>
+  <div class="h-full p-4 overflow-y-auto bg-white">
+    <div class="flex items-center justify-center pb-8 pt-6 relative">
+      <div class="cursor-pointer flex items-center justify-center w-full h-10">
+        <img
+          src="assets/images/logo_cred_mais.png"
+          alt="Logo"
+          class="w-full h-full object-cover"
+          [routerLink]="['/']"
+        />
+      </div>
+      <button (click)="closeMenu.emit()" class="sm:hidden">
+        <fa-icon [icon]="faTimes"></fa-icon>
+      </button>
+    </div>
+    <div class="mb-4">
+      <h5
+        class="text-[11px] leading-4 font-bold text-gray-500 uppercase tracking-wider"
+      >
+        Clientes
+      </h5>
+      <ul class="flex flex-col space-y-2">
+        <app-menu-item
+          *ngFor="let item of menuItems"
+          [icon]="item.icon"
+          [label]="item.label"
+          [route]="item.route"
+        ></app-menu-item>
+      </ul>
+    </div>
+  </div>
+</aside>
