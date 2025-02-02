@@ -8,16 +8,16 @@ export default [
   {
     label: 'Lista de Clientes',
     icon: faUsers,
-    route: '/clients',
+    route: '/clientes',
   },
   {
     label: 'Cadastro de Clientes',
     icon: faPlus,
-    route: '/create-client',
+    route: '/criar-cliente',
   },
   {
     label: 'Consulta de Clientes',
     icon: faMagnifyingGlass,
-    route: '/search-clients',
+    route: '/consultar-cliente',
   },
 ] as Models.MenuItem[];

@@ -7,10 +7,7 @@ module.exports = {
   plugins: [
     withModuleFederationPlugin({
       name: "mfe-angular-host",
-      remotes: {
-        "mfe-nextjs-react":
-          "mfe-nextjs-react@http://localhost:3001/_next/static/chunks/remoteEntry.js",
-      },
+      remotes: {},
       shared: {
         ...shareAll({
           singleton: true,
