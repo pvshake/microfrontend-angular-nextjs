@@ -6,8 +6,12 @@ const {
 module.exports = {
   plugins: [
     withModuleFederationPlugin({
-      name: "mfe-angular-host",
-      remotes: {},
+      name: "mfeAngularHost",
+      remotes: {
+        mfeViteReact:
+          "mfeViteReact@http://localhost:5173/assets/remoteEntry.js",
+      },
+      remoteType: "module",
       shared: {
         ...shareAll({
           singleton: true,
