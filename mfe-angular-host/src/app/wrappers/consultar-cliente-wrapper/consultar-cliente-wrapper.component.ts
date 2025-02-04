@@ -1,7 +1,5 @@
 import { loadRemoteModule } from '@angular-architects/module-federation';
-import { Component, ElementRef, inject, OnInit } from '@angular/core';
-import React from 'react';
-import ReactDOM from 'react-dom/client';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-consultar-cliente-wrapper',
@@ -10,24 +8,18 @@ import ReactDOM from 'react-dom/client';
   templateUrl: './consultar-cliente-wrapper.component.html',
   styleUrl: './consultar-cliente-wrapper.component.scss',
 })
-export class ConsultarClienteWrapperComponent implements OnInit {
-  private el = inject(ElementRef);
+export class ConsultarClienteWrapperComponent implements AfterViewInit {
+  @ViewChild('wcContainer', { static: true }) wcContainer!: ElementRef;
 
-  async ngOnInit() {
+  async ngAfterViewInit() {
     try {
-      const ConsultarClientePage = await loadRemoteModule({
+      await loadRemoteModule({
         type: 'module',
-        remoteEntry: 'http://localhost:5173/assets/remoteEntry.js',
-        exposedModule: './ConsultarClientePage',
-      }).then((m) => m.default);
-
-      if (ConsultarClientePage) {
-        ReactDOM.createRoot(this.el.nativeElement.querySelector('div')).render(
-          React.createElement(ConsultarClientePage)
-        );
-      } else {
-        console.error('ConsultarClientePage não carregado corretamente');
-      }
+        remoteEntry: 'http://localhost:5173/remoteEntry.js',
+        exposedModule: './ConsultarClientePageWC',
+      });
+      const wc = document.createElement('consultar-cliente-page-wc');
+      this.wcContainer.nativeElement.appendChild(wc);
     } catch (error) {
       console.error('Erro ao carregar o módulo remoto:', error);
     }

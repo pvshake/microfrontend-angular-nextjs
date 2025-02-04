@@ -1,27 +1,35 @@
 /// <reference types="vitest" />
 import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
 import tsconfigPaths from 'vite-tsconfig-paths'
-import federation from '@originjs/vite-plugin-federation'
+import { federation } from '@module-federation/vite'
 
 // https://vitejs.dev/config https://vitest.dev/config
 export default defineConfig({
   plugins: [
-    react(),
     tsconfigPaths(),
     federation({
       name: 'mfeViteReact',
-      remoteType: 'module',
+      dev: true,
       filename: 'remoteEntry.js',
-      exposes: [
-        { './ClientesPage': './src/pages/ClientesPage' },
-        { './CriarClientePage': './src/pages/CriarClientePage' }
-      ],
-      shared: ['react', 'react-dom']
+      exposes: {
+        './ClientesPageWC': './src/web-components/ClientesPageWC',
+        './CriarClientePageWC': './src/web-components/CriarClientePageWC',
+        './ConsultarClientePageWC':
+          './src/web-components/ConsultarClientePageWC',
+        './ClienteRetrievePageWC': './src/web-components/ClienteRetrievePageWC'
+      },
+      shared: {
+        react: { singleton: true },
+        'react-dom': { singleton: true }
+      }
     })
   ],
+  optimizeDeps: {
+    include: ['react', 'react-dom']
+  },
   build: {
-    target: 'esnext'
+    target: 'esnext',
+    minify: false
   },
   test: {
     globals: true,

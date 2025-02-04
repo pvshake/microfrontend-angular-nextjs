@@ -5,10 +5,10 @@ const CriarClientePage = () => {
     <div>
       <h1 className="text-5xl font-extrabold text-red-500">CriarClientePage</h1>
       <button
-        className="border-4 border-red-500"
+        className="border-4 border-blue-500"
         onClick={() => window.location.replace('/clientes')}
       >
-        clica ai
+        kkkkk
       </button>
     </div>
   )

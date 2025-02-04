@@ -27,11 +27,11 @@
     "@types/react": "^18.3.1",
     "@types/react-dom": "^18.3.1",
     "primeng": "^17.18.15",
-    "react": "^18.3.1",
-    "react-dom": "^18.3.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
-    "zone.js": "~0.14.3"
+    "zone.js": "~0.14.3",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
   },
   "devDependencies": {
     "@angular-builders/custom-webpack": "^17.0.2",

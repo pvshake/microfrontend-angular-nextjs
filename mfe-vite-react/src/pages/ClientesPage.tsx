@@ -1,14 +1,20 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 
 const ClientesPage = () => {
+  const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    console.log('React ClientesPage montado!')
+  }, [])
+
   return (
     <div>
-      <h1 className="text-5xl font-extrabold text-red-500">ClientesPage</h1>
+      <p>Contador: {count}</p>
       <button
-        className="border-4 border-red-500"
-        onClick={() => window.location.replace(`/criar-cliente/123`)}
+        className="border-4 border-blue-500"
+        onClick={() => setCount(count + 1)}
       >
-        clica ai
+        Incrementar
       </button>
     </div>
   )

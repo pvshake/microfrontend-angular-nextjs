@@ -8,27 +8,27 @@ export const routes: Routes = [
         (c) => c.ClientesWrapperComponent
       ),
   },
-  // {
-  //   path: 'criar-cliente',
-  //   loadComponent: () =>
-  //     import(
-  //       './wrappers/criar-cliente-wrapper/criar-cliente-wrapper.component'
-  //     ).then((c) => c.CriarClienteWrapperComponent),
-  // },
-  // {
-  //   path: 'consultar-cliente',
-  //   loadComponent: () =>
-  //     import(
-  //       './wrappers/consultar-cliente-wrapper/consultar-cliente-wrapper.component'
-  //     ).then((c) => c.ConsultarClienteWrapperComponent),
-  // },
-  // {
-  //   path: 'clientes/:clienteId',
-  //   loadComponent: () =>
-  //     import(
-  //       './wrappers/cliente-retrieve-wrapper/cliente-retrieve-wrapper.component'
-  //     ).then((c) => c.ClienteRetrieveWrapperComponent),
-  // },
+  {
+    path: 'criar-cliente',
+    loadComponent: () =>
+      import(
+        './wrappers/criar-cliente-wrapper/criar-cliente-wrapper.component'
+      ).then((c) => c.CriarClienteWrapperComponent),
+  },
+  {
+    path: 'consultar-cliente',
+    loadComponent: () =>
+      import(
+        './wrappers/consultar-cliente-wrapper/consultar-cliente-wrapper.component'
+      ).then((c) => c.ConsultarClienteWrapperComponent),
+  },
+  {
+    path: 'clientes/:clienteId',
+    loadComponent: () =>
+      import(
+        './wrappers/cliente-retrieve-wrapper/cliente-retrieve-wrapper.component'
+      ).then((c) => c.ClienteRetrieveWrapperComponent),
+  },
   {
     path: '',
     loadComponent: () =>
