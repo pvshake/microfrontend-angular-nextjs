@@ -2,7 +2,7 @@ import { Models } from "../types/Cliente";
 
 export const clientesMock: Models.Cliente[] = [
   {
-    id: "550e8400-e29b-41d4-a716-446655440000", // Exemplo UUID
+    id: "550e8400-e29b-41d4-a716-446655440000",
     nomeCompleto: "João Silva",
     cpf: "123.456.789-00",
     email: "joao.silva@email.com",

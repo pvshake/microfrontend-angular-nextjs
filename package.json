@@ -1,5 +1,13 @@
 {
+  "scripts": {
+    "start:react": "cd mfe-vite-react && npm install && npm run dev",
+    "start:angular": "cd mfe-angular-host && npm install && ng serve",
+    "start-mfes": "npm install && concurrently \"npm run start:react\" \"npm run start:angular\""
+  },
   "dependencies": {
     "uuid": "^11.0.5"
+  },
+  "devDependencies": {
+    "concurrently": "^9.1.2"
   }
 }

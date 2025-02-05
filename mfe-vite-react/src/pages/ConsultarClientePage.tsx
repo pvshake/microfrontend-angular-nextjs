@@ -1,9 +1,9 @@
-import ClientesList from '@/components/ClientesList'
-import FilterCliente from '@/components/FilterCliente'
 import { Form } from 'antd'
 import React, { useState } from 'react'
 import { Models } from '../../../shared/types/Cliente'
 import { filterClientes } from '../../../shared/storage/clientes'
+import FilterCliente from '@/components/FilterCliente/FilterCliente'
+import ClientesList from '@/components/ClientesList/ClientesList'
 
 const ConsultarClientePage = () => {
   const [form] = Form.useForm()

@@ -39,8 +39,12 @@ export default defineConfig({
   },
   test: {
     globals: true,
-    environment: 'happy-dom',
-    setupFiles: '.vitest/setup',
-    include: ['**/test.{ts,tsx}']
+    environment: 'jsdom',
+    include: ['src/**/*.test.tsx', 'src/**/*.spec.tsx'],
+    browser: {
+      enabled: true,
+      name: 'chromium',
+      provider: 'playwright'
+    }
   }
 })

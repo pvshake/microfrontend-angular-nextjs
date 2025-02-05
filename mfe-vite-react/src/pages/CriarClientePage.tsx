@@ -1,8 +1,8 @@
-import FormCliente from '@/components/FormCliente'
 import { Form, message } from 'antd'
 import React, { useCallback } from 'react'
 import { Models } from '../../../shared/types/Cliente'
 import { postCliente } from '../../../shared/storage/clientes'
+import FormCliente from '@/components/FormCliente/FormCliente'
 
 const CriarClientePage = () => {
   const [form] = Form.useForm()

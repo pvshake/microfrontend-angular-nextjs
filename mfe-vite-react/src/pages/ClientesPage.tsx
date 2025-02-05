@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react'
 import { Models } from '../../../shared/types/Cliente'
 import { getClientes, filterClientes } from '../../../shared/storage/clientes'
-import ClientesList from '@/components/ClientesList'
+import ClientesList from '@/components/ClientesList/ClientesList'
 
 const ClientesPage = () => {
   const [clientes, setClientes] = useState<Models.Cliente[]>(

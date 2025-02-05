@@ -1,10 +1,10 @@
-import FormCliente from '@/components/FormCliente'
 import { Button, Form, message } from 'antd'
 import React, { useCallback, useEffect, useState } from 'react'
 import { Models } from '../../../shared/types/Cliente'
 import { useParams } from 'react-router'
 import { getCliente, patchCliente } from '../../../shared/storage/clientes'
-import ChartScore from '@/components/ChartScore'
+import FormCliente from '@/components/FormCliente/FormCliente'
+import ChartScore from '@/components/ChartScore/ChartScore'
 
 const ClienteRetrievePage = () => {
   const [form] = Form.useForm()
