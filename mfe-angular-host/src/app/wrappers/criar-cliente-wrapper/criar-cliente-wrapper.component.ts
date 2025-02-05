@@ -1,10 +1,11 @@
 import { loadRemoteModule } from '@angular-architects/module-federation';
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { HeaderTitlePageComponent } from '../../components/header-title-page/header-title-page.component';
 
 @Component({
   selector: 'app-criar-cliente-wrapper',
   standalone: true,
-  imports: [],
+  imports: [HeaderTitlePageComponent],
   templateUrl: './criar-cliente-wrapper.component.html',
   styleUrl: './criar-cliente-wrapper.component.scss',
 })

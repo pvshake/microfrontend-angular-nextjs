@@ -1,10 +1,11 @@
 import { loadRemoteModule } from '@angular-architects/module-federation';
 import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
+import { HeaderTitlePageComponent } from '../../components/header-title-page/header-title-page.component';
 
 @Component({
   selector: 'app-consultar-cliente-wrapper',
   standalone: true,
-  imports: [],
+  imports: [HeaderTitlePageComponent],
   templateUrl: './consultar-cliente-wrapper.component.html',
   styleUrl: './consultar-cliente-wrapper.component.scss',
 })

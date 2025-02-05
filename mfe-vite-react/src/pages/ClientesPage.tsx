@@ -1,22 +1,48 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
+import { Models } from '../../../shared/types/Cliente'
+import { getClientes, filterClientes } from '../../../shared/storage/clientes'
+import ClientesList from '@/components/ClientesList'
 
 const ClientesPage = () => {
-  const [count, setCount] = useState(0)
+  const [clientes, setClientes] = useState<Models.Cliente[]>(
+    [] as Models.Cliente[]
+  )
+  const [filteredClientes, setFilteredClientes] = useState<Models.Cliente[]>(
+    [] as Models.Cliente[]
+  )
 
-  useEffect(() => {
-    console.log('React ClientesPage montado!')
+  const _getClientes = useCallback(() => {
+    const data = getClientes()
+    setClientes(data)
+    setFilteredClientes(data)
   }, [])
 
+  const onSearch = (query: string) => {
+    if (!query) {
+      setFilteredClientes(clientes)
+      return
+    }
+
+    const resultados = filterClientes(query)
+    setFilteredClientes(resultados)
+  }
+
+  useEffect(() => {
+    _getClientes()
+  }, [_getClientes])
+
   return (
-    <div>
-      <p>Contador: {count}</p>
-      <button
-        className="border-4 border-blue-500"
-        onClick={() => setCount(count + 1)}
-      >
-        Incrementar
-      </button>
-    </div>
+    <article>
+      {clientes && clientes.length > 0 ? (
+        <div>
+          <ClientesList clientes={filteredClientes} onSearch={onSearch} />
+        </div>
+      ) : (
+        <div className="flex items-center justify-center h-full">
+          <p className="text-gray-500 text-lg">Nenhum cliente encontrado</p>
+        </div>
+      )}
+    </article>
   )
 }
 

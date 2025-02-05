@@ -1,4 +1,4 @@
-import CriarClientePage from 'pages/CriarClientePage'
+import CriarClientePage from '@/pages/CriarClientePage'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 

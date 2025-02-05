@@ -1,11 +1,13 @@
 import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { loadRemoteModule } from '@angular-architects/module-federation';
+import { HeaderTitlePageComponent } from '../../components/header-title-page/header-title-page.component';
 
 @Component({
   selector: 'app-clientes-wrapper',
   standalone: true,
   templateUrl: './clientes-wrapper.component.html',
   styleUrl: './clientes-wrapper.component.scss',
+  imports: [HeaderTitlePageComponent],
 })
 export class ClientesWrapperComponent implements AfterViewInit {
   @ViewChild('wcContainer', { static: true }) wcContainer!: ElementRef;

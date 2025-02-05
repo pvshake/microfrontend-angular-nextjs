@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import ConsultarClientePage from 'pages/ConsultarClientePage'
+import ConsultarClientePage from '@/pages/ConsultarClientePage'
 
 class ConsultarClientePageWC extends HTMLElement {
   private root?: ReactDOM.Root

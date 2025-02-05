@@ -2,6 +2,7 @@
 import { defineConfig } from 'vite'
 import tsconfigPaths from 'vite-tsconfig-paths'
 import { federation } from '@module-federation/vite'
+import path from 'path'
 
 // https://vitejs.dev/config https://vitest.dev/config
 export default defineConfig({
@@ -24,6 +25,11 @@ export default defineConfig({
       }
     })
   ],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src')
+    }
+  },
   optimizeDeps: {
     include: ['react', 'react-dom']
   },

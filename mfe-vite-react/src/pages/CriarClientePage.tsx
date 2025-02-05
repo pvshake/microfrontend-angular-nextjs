@@ -1,15 +1,30 @@
-import React from 'react'
+import FormCliente from '@/components/FormCliente'
+import { Form, message } from 'antd'
+import React, { useCallback } from 'react'
+import { Models } from '../../../shared/types/Cliente'
+import { postCliente } from '../../../shared/storage/clientes'
 
 const CriarClientePage = () => {
+  const [form] = Form.useForm()
+
+  const _postCliente = useCallback(
+    (values: Models.Cliente) => {
+      const { id, statusCredito, ...clienteData } = values
+      try {
+        postCliente(clienteData)
+        message.success('Cliente criado com sucesso')
+        form.resetFields()
+        window.location.replace('/clientes')
+      } catch (error) {
+        message.error('Erro ao criar cliente')
+      }
+    },
+    [form]
+  )
+
   return (
     <div>
-      <h1 className="text-5xl font-extrabold text-red-500">CriarClientePage</h1>
-      <button
-        className="border-4 border-blue-500"
-        onClick={() => window.location.replace('/clientes')}
-      >
-        kkkkk
-      </button>
+      <FormCliente form={form} onFinish={_postCliente} />
     </div>
   )
 }

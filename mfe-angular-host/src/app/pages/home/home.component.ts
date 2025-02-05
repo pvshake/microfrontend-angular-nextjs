@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { HeaderTitlePageComponent } from '../../components/header-title-page/header-title-page.component';
+import { Models } from '../../../../../shared/types/Cliente';
+import { getClientes } from '../../../../../shared/storage/clientes';
 
 @Component({
   selector: 'app-home',
@@ -8,4 +10,10 @@ import { HeaderTitlePageComponent } from '../../components/header-title-page/hea
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',
 })
-export class HomeComponent {}
+export class HomeComponent implements OnInit {
+  clientes = [] as Models.Cliente[];
+
+  ngOnInit(): void {
+    this.clientes = getClientes();
+  }
+}
