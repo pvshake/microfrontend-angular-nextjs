@@ -21,7 +21,7 @@ export namespace Models {
     }
 
     interface DadosPagamento {
-      tipo: "cartão" | "boleto" | "pix";
+      tipo: "cartao" | "boleto" | "pix";
       nrCartao?: string;
       validadeCartao?: string;
       cvv?: string;

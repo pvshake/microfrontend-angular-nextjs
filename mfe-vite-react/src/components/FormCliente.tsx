@@ -1,7 +1,7 @@
 import { Input } from '@/components/ui/input'
 import { withMask } from 'use-mask-input'
 import { Divider, Form, FormInstance, Select } from 'antd'
-import React, { useCallback, useMemo, useState } from 'react'
+import React, { useCallback, useEffect, useMemo, useState } from 'react'
 import { unformat } from '@/utils/formatter'
 import { Models } from '../../../shared/types/Cliente'
 import defaultFormRules from '@/utils/defaultFormRules'
@@ -32,11 +32,9 @@ const FormCliente: React.FC<Props> = ({
     }
   }, [rawValues])
 
-  const [tipoPagamento, setTipoPagamento] = useState(
-    initialValues &&
-      initialValues.dadosPagamento &&
-      initialValues.dadosPagamento.tipo
-  )
+  const [tipoPagamento, setTipoPagamento] = useState<
+    'cartao' | 'pix' | 'boleto'
+  >()
 
   const submitToFather = useCallback(
     (values: Models.Cliente) => {
@@ -50,6 +48,12 @@ const FormCliente: React.FC<Props> = ({
     [onFinish]
   )
 
+  useEffect(() => {
+    if (initialValues?.dadosPagamento?.tipo) {
+      setTipoPagamento(initialValues.dadosPagamento.tipo)
+    }
+  }, [initialValues])
+
   return (
     <>
       <Form
@@ -59,7 +63,32 @@ const FormCliente: React.FC<Props> = ({
         onFinish={submitToFather}
         initialValues={initialValues}
       >
-        {/* Dados Pessoais */}
+        <div className="flex items-center justify-end gap-4 mt-4">
+          {type === 'edit' && (
+            <Button
+              className="flex items-center gap-1"
+              type="button"
+              variant="outline"
+              onClick={() => setEditing(!editing)}
+            >
+              {editing ? 'Cancelar' : 'Editar'}
+            </Button>
+          )}
+          <Button
+            className="flex items-center gap-1"
+            type="button"
+            variant="primary"
+            onClick={form.submit}
+            disabled={!editing && type === 'edit'}
+          >
+            {type === 'create' ? (
+              <Plus className="h-5 w-5" />
+            ) : (
+              <Pencil className="h-5 w-5" />
+            )}
+            {type === 'create' ? 'Criar' : 'Alterar'} Cliente
+          </Button>
+        </div>
         <span className="text-sm font-medium text-gray-600">
           Dados Pessoais
         </span>
@@ -104,7 +133,6 @@ const FormCliente: React.FC<Props> = ({
           </Form.Item>
         </div>
         <Divider className="!m-2" />
-        {/* Endereço */}
         <span className="text-sm font-medium text-gray-600">Endereço</span>
         <div className="grid grid-cols-2 max-md:grid-cols-1 gap-4 w-full h-fit my-6">
           <Form.Item
@@ -150,23 +178,6 @@ const FormCliente: React.FC<Props> = ({
           </Form.Item>
         </div>
         <Divider className="!m-2" />
-        {/* Score */}
-        <span className="text-sm font-medium text-gray-600">Crédito</span>
-        <div className="grid grid-cols-2 max-md:grid-cols-1 gap-4 w-full h-fit my-6">
-          <Form.Item
-            name="score"
-            label="Score"
-            rules={[...defaultFormRules, { max: 1000, min: 0 }]}
-          >
-            <Input
-              className="disabled:bg-gray-200 disabled:text-gray-500 disabled:cursor-not-allowed"
-              type="number"
-              disabled={!editing && type === 'edit'}
-            />
-          </Form.Item>
-        </div>
-        <Divider className="!m-2" />
-        {/* Dados de Pagamento */}
         <span className="text-sm font-medium text-gray-600">
           Dados de Pagamento
         </span>
@@ -180,13 +191,13 @@ const FormCliente: React.FC<Props> = ({
               disabled={!editing && type === 'edit'}
               onChange={(value) => setTipoPagamento(value)}
             >
-              <Select.Option value="cartão">Cartão</Select.Option>
+              <Select.Option value="cartao">Cartão</Select.Option>
               <Select.Option value="boleto">Boleto</Select.Option>
               <Select.Option value="pix">Pix</Select.Option>
             </Select>
           </Form.Item>
 
-          {tipoPagamento === 'cartão' && (
+          {tipoPagamento === 'cartao' && (
             <>
               <Form.Item
                 name={['dadosPagamento', 'nrCartao']}
@@ -251,33 +262,6 @@ const FormCliente: React.FC<Props> = ({
           )}
         </div>
       </Form>
-
-      <div className="flex items-center gap-4 mt-4">
-        {type === 'edit' && (
-          <Button
-            className="flex items-center gap-1"
-            type="button"
-            variant="outline"
-            onClick={() => setEditing(!editing)}
-          >
-            {editing ? 'Cancelar' : 'Editar'}
-          </Button>
-        )}
-        <Button
-          className="flex items-center gap-1"
-          type="button"
-          variant="primary"
-          onClick={form.submit}
-          disabled={!editing && type === 'edit'}
-        >
-          {type === 'create' ? (
-            <Plus className="h-5 w-5" />
-          ) : (
-            <Pencil className="h-5 w-5" />
-          )}
-          {type === 'create' ? 'Criar' : 'Alterar'} Cliente
-        </Button>
-      </div>
     </>
   )
 }

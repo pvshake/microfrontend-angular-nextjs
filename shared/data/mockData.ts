@@ -15,7 +15,7 @@ export const clientesMock: Models.Cliente[] = [
     },
     dataNascimento: "22/10/1980",
     dadosPagamento: {
-      tipo: "cartão",
+      tipo: "cartao",
       nrCartao: "4111 1111 1111 1111",
       validadeCartao: "12/27",
       cvv: "123",

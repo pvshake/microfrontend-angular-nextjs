@@ -4,6 +4,7 @@ import React, { useCallback, useEffect, useState } from 'react'
 import { Models } from '../../../shared/types/Cliente'
 import { useParams } from 'react-router'
 import { getCliente, patchCliente } from '../../../shared/storage/clientes'
+import ChartScore from '@/components/ChartScore'
 
 const ClienteRetrievePage = () => {
   const [form] = Form.useForm()
@@ -54,7 +55,6 @@ const ClienteRetrievePage = () => {
 
   useEffect(() => {
     if (clienteId) {
-      console.log('ID capturado da URL:', clienteId)
       _getCliente(clienteId)
     } else {
       console.log('ID não encontrado na URL')
@@ -63,6 +63,7 @@ const ClienteRetrievePage = () => {
 
   return (
     <div>
+      <ChartScore score={cliente.score} cliente={cliente} />
       <FormCliente
         form={form}
         onFinish={_patchCliente}

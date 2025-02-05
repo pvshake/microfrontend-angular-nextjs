@@ -27,16 +27,46 @@ export function getCliente(id: string): Models.Cliente | null {
   return clientes.find((cliente) => String(cliente.id) === String(id)) || null;
 }
 
-export function filterClientes(query: string): Models.Cliente[] {
+export function filterClientes(
+  query: string,
+  filtros?: Partial<Models.Cliente>
+): Models.Cliente[] {
   const clientes = getClientes();
   const searchQuery = query.toLowerCase();
 
-  return clientes.filter(
-    (cliente) =>
-      cliente.nomeCompleto.toLowerCase().includes(searchQuery) ||
-      cliente.cpf.includes(searchQuery) ||
-      cliente.email.toLowerCase().includes(searchQuery)
-  );
+  return clientes.filter((cliente) => {
+    const nomeMatch = cliente.nomeCompleto.toLowerCase().includes(searchQuery);
+    const cpfMatch = cliente.cpf.includes(searchQuery);
+    const emailMatch = cliente.email.toLowerCase().includes(searchQuery);
+
+    let filtrosMatch = true;
+    if (filtros) {
+      if (filtros.nomeCompleto) {
+        filtrosMatch =
+          filtrosMatch &&
+          cliente.nomeCompleto
+            .toLowerCase()
+            .includes(filtros.nomeCompleto.toLowerCase());
+      }
+      if (filtros.cpf) {
+        filtrosMatch = filtrosMatch && cliente.cpf.includes(filtros.cpf);
+      }
+      if (filtros.email) {
+        filtrosMatch =
+          filtrosMatch &&
+          cliente.email.toLowerCase().includes(filtros.email.toLowerCase());
+      }
+      if (filtros.score !== undefined) {
+        filtrosMatch = filtrosMatch && cliente.score === filtros.score;
+      }
+      if (filtros.statusCredito) {
+        filtrosMatch =
+          filtrosMatch && cliente.statusCredito === filtros.statusCredito;
+      }
+    }
+
+    return (nomeMatch || cpfMatch || emailMatch) && filtrosMatch;
+  });
 }
 
 export function postCliente(
@@ -44,7 +74,7 @@ export function postCliente(
 ): Models.Cliente {
   const clientes = getClientes();
 
-  const score = cliente.score;
+  const score = Math.floor(Math.random() * 1000);
   let statusCredito = "inapto";
 
   if (score >= 500 && score < 800) {
@@ -58,6 +88,7 @@ export function postCliente(
   const newCliente = {
     ...cliente,
     id: uuidv4(),
+    score,
     statusCredito,
   } as Models.Cliente;
 

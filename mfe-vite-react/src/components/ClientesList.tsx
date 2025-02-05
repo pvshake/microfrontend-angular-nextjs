@@ -18,41 +18,45 @@ import ClienteMobileItem from './ClienteMobileItem'
 interface ClientesListProps {
   clientes: Models.Cliente[]
   onSearch?: (value: string) => void
+  hideSearchBar?: boolean
 }
 
-const ClientesList = ({ clientes, onSearch = () => {} }: ClientesListProps) => {
+const ClientesList = ({
+  clientes,
+  onSearch = () => {},
+  hideSearchBar = false
+}: ClientesListProps) => {
   return (
     <div className="shadow-lg mt-6 flex h-auto w-full flex-col rounded-2xl">
-      <div className="flex w-full items-center justify-between gap-2 p-5">
-        <div className="relative w-full">
-          <Input
-            className="!bg-white-50 h-12 rounded-3xl border-gray-200 px-4"
-            placeholder="Buscar cliente por nome..."
-            onChange={(e: any) => onSearch(e.target.value)}
-          />
-          <div className="absolute right-2 top-[0.325rem] h-full px-3 py-2">
-            <Search className="size-5 text-gray-500" />
+      {!hideSearchBar && (
+        <div className="flex w-full items-center justify-between gap-2 p-5">
+          <div className="relative w-full">
+            <Input
+              className="!bg-white-50 h-12 rounded-3xl border-gray-200 px-4"
+              placeholder="Buscar cliente por nome..."
+              onChange={(e: any) => onSearch(e.target.value)}
+            />
+            <div className="absolute right-2 top-[0.325rem] h-full px-3 py-2">
+              <Search className="size-5 text-gray-500" />
+            </div>
           </div>
         </div>
-      </div>
+      )}
       {clientes.length > 0 ? (
         <Table className="w-full border-collapse bg-white">
           <TableHeader>
             <TableRow className="bg-gray-200 text-sm font-semibold leading-6 text-gray-600">
-              <TableHead className="w-[30%] p-4 text-left max-md:hidden">
+              <TableHead className="w-[40%] p-4 text-left max-md:hidden">
                 Nome Cliente
               </TableHead>
               <TableHead className="w-[15%] p-4 text-left max-md:hidden">
                 CPF
               </TableHead>
-              <TableHead className="w-[15%] p-4 text-left max-md:hidden">
-                Data de Nascimento
+              <TableHead className="w-[25%] p-4 text-left max-md:hidden">
+                E-mail
               </TableHead>
               <TableHead className="w-[10%] p-4 text-center max-md:hidden">
                 Score
-              </TableHead>
-              <TableHead className="w-[20%] p-4 text-center max-md:hidden">
-                Status
               </TableHead>
               <TableHead className="w-[10%] p-4 text-right max-md:hidden">
                 Acessar
@@ -85,7 +89,7 @@ const ClientesList = ({ clientes, onSearch = () => {} }: ClientesListProps) => {
                   {formatter([cliente.cpf, 'cpf'])}
                 </TableCell>
                 <TableCell className="p-4 max-md:hidden">
-                  {cliente.dataNascimento}
+                  {cliente.email}
                 </TableCell>
                 <TableCell className="p-4 max-md:hidden text-center">
                   {cliente.score >= 800 ? (
@@ -94,21 +98,6 @@ const ClientesList = ({ clientes, onSearch = () => {} }: ClientesListProps) => {
                     <span className="text-yellow-500">{cliente.score}</span>
                   ) : (
                     <span className="text-red-500">{cliente.score}</span>
-                  )}
-                </TableCell>
-                <TableCell className="p-4 max-md:hidden text-center">
-                  {cliente.statusCredito === 'apto' ? (
-                    <span className="text-green-500 border rounded-sm border-green-500 bg-green-100 p-1">
-                      Apto
-                    </span>
-                  ) : cliente.statusCredito === 'semiApto' ? (
-                    <span className="text-yellow-500 border rounded-sm border-yellow-500 bg-yellow-100 p-1">
-                      Apto Parcialmente
-                    </span>
-                  ) : (
-                    <span className="text-red-500 border rounded-sm border-red-500 bg-red-100 p-1">
-                      Inapto
-                    </span>
                   )}
                 </TableCell>
                 <TableCell className="p-4 text-center max-md:hidden">
